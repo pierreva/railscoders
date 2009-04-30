@@ -1,0 +1,52 @@
+new-host:railscoders pierreva$ rake deprecated
+(in /Users/pierreva/Documents/books/Practical_Rails_Social_Networking_Sites_-_Apress/railscoders)
+--> component
+  Clean! Cheers for you!
+
+--> @session
+  Clean! Cheers for you!
+
+--> paginate
+  !! The default paginator is slow. Writing your own may be faster !!
+  ...................................................................
+controllers/articles_controller.rb:6:      @articles_pages, @articles = paginate(:articles, 
+controllers/articles_controller.rb:12:      @articles_pages, @articles = paginate(:articles, 
+controllers/articles_controller.rb:73:    @articles_pages, @articles = paginate(:articles, :order => 'published_at DESC')
+controllers/mobile/articles_controller.rb:6:      @articles_pages, @articles = paginate :articles, 
+controllers/mobile/articles_controller.rb:12:      @articles_pages, @articles = paginate :articles, 
+controllers/posts_controller.rb:10:    @posts_pages, @posts = paginate(:posts, 
+controllers/topics_controller.rb:9:    @topics_pages, @topics = paginate(:topics, 
+
+--> find_first
+  Clean! Cheers for you!
+
+--> @request
+  Clean! Cheers for you!
+
+--> find_all
+  !! Use find(:all) instead !!
+  ............................
+controllers/articles_controller.rb:11:      @articles = Article.find_all_by_published(true)
+
+--> @flash
+  Clean! Cheers for you!
+
+--> render_partial
+  Clean! Cheers for you!
+
+--> @env
+  Clean! Cheers for you!
+
+--> :post => true
+  Clean! Cheers for you!
+
+--> end_form_tag
+  Clean! Cheers for you!
+
+--> start_form_tag
+  Clean! Cheers for you!
+
+--> @params
+  Clean! Cheers for you!
+
+new-host:railscoders pierreva$ 

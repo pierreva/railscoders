@@ -1,0 +1,67 @@
+new-host:railscoders pierreva$ ruby r2check.rb
+Your application doesn't seem ready to upgrade to Rails 2.0. Please take a
+moment to review the following:
+
+-- breakpoint server -----------------------------------------------------------
+
+  The configuration option has been removed in favor of the better ruby-debug
+  library.  (changeset 6627)
+  
+    gem install ruby-debug
+  
+  Remove the line(s) from configuration since the setting has no effect anymore.
+  Instead, start `script/server` with the "-u" or "--debugger" option (or "-h"
+  to see all the options).
+  
+  files:
+  config/environments/development.rb:12:  config.breakpoint_server = true
+
+-- nested resource named routes ------------------------------------------------
+
+  Nested resource named routes are now prefixed by their action name. 
+  (changeset 7138)
+  
+  Rename your calls to such named routes from ie. 'group_new_user_path' to
+  'new_group_user_path'.  Same applies for 'edit' paths.
+  
+  files:
+  app/views/layouts/_menu.rhtml:17:  <li><%= link_to 'Upload Photo', user_new_photo_path(:user_id => logged_in_user) -%></li>
+  app/views/mobile/posts/index.rhtml:11:  <%= link_to 'Post Reply', mobile_new_post_path(:forum_id => @topic.forum, :topic_id => @topic) -%>
+  app/views/mobile/topics/index.rhtml:7:  <%= link_to 'Post New Topic', mobile_new_topic_path(:forum_id => @forum) -%>
+  app/views/user_photos/index.rhtml:4:  <p><%= link_to 'Upload a new photo', user_new_photo_path() %></p>
+  app/views/user_photos/show.rhtml:20:  <%= link_to 'Edit', user_edit_photo_path(:user_id=>@photo.user, :id=>@photo) %>,
+
+-- pagination ------------------------------------------------------------------
+
+  Pagination has been extracted from Rails core.  (changeset 6992)
+  
+    script/plugin install svn://errtheblog.com/svn/plugins/classic_pagination
+  
+  Alternative: you can replace your pagination calls with will_paginate (find it
+  on http://rock.errtheblog.com/).
+  
+  files:
+  app/controllers/articles_controller.rb:6:  @articles_pages, @articles = paginate(:articles,
+  app/controllers/articles_controller.rb:12:  @articles_pages, @articles = paginate(:articles,
+  app/controllers/articles_controller.rb:73:  @articles_pages, @articles = paginate(:articles, :order => 'published_at DESC')
+  app/controllers/mobile/articles_controller.rb:6:  @articles_pages, @articles = paginate :articles,
+  app/controllers/mobile/articles_controller.rb:12:  @articles_pages, @articles = paginate :articles,
+  app/controllers/posts_controller.rb:10:  @posts_pages, @posts = paginate(:posts,
+  app/controllers/topics_controller.rb:9:  @topics_pages, @topics = paginate(:topics,
+  app/views/articles/admin.rhtml:7:  <%= pagination_links @articles_pages, :params => params %>
+  app/views/articles/index.rhtml:9:  <%= pagination_links @articles_pages, :params => params %>
+  app/views/blogs/index.rhtml:12:  <%= pagination_links @entry_pages, :params => params %>
+  app/views/entries/index.rhtml:29:  <%= pagination_links @entry_pages, :params => params %>
+  app/views/mobile/articles/index.rhtml:5:  <%= pagination_links @articles_pages, :params => params %>
+  app/views/mobile/articles/index.rhtml:28:  <%= pagination_links @articles_pages, :params => params %>
+  app/views/mobile/blogs/index.rhtml:12:  <%= pagination_links @entry_pages, :params => params %>
+  app/views/mobile/posts/index.rhtml:19:  <%= pagination_links @posts_pages, :params => params %>
+  app/views/mobile/posts/index.rhtml:32:  <%= pagination_links @posts_pages, :params => params %>
+  app/views/mobile/topics/index.rhtml:15:  <%= pagination_links @topics_pages, :params => params %>
+  app/views/mobile/topics/index.rhtml:28:  <%= pagination_links @topics_pages, :params => params %>
+  app/views/photos/_page_links.rhtml:7:  <%= pagination_links @photo_pages, :params => params %>
+  app/views/posts/index.rhtml:20:  <%= pagination_links @posts_pages, :params => params %>
+  app/views/posts/index.rhtml:62:  <%= pagination_links @posts_pages, :params => params %>
+  app/views/topics/index.rhtml:15:  <%= pagination_links @topics_pages, :params => params %>
+  app/views/topics/index.rhtml:49:  <%= pagination_links @topics_pages, :params => params %>
+new-host:railscoders pierreva$ 
